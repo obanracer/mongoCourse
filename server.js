@@ -83,6 +83,7 @@ router.post("/mongoose-model", function (req, res, next) {
 
 const createPerson = require("./myApp.js").createAndSavePerson;
 router.get("/create-and-save-person", function (req, res, next) {
+  console.log("ayy routing ayy");
   // in case of incorrect function use wait timeout then respond
   let t = setTimeout(() => {
     next({ message: "timeout" });
@@ -101,7 +102,13 @@ router.get("/create-and-save-person", function (req, res, next) {
         return next(err);
       }
       res.json(pers);
-      pers.remove();
+
+      // WHO THE FUCK THOUGHT IT WOULD BE A GOOD IDEA 
+      // TO DELETE THE THING YOU JUST CREATED AND NOT SAY 
+      // A FUCKING WORD ABOUT WHAT THE ACTUAL FUCKING FUCK
+      // FUCK YOU
+      // GO FUCK A CACTUS
+      //pers.remove();
     });
   });
 });
@@ -414,6 +421,7 @@ app.use(function (req, res) {
   if (req.method.toLowerCase() === "options") {
     res.end();
   } else {
+    console.log("404 my dude");
     res.status(404).type("txt").send("Not Found");
   }
 });

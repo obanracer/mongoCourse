@@ -19,7 +19,9 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log("open i guess?");
-  /*
+  
+  // test kitties
+  console.log("deploying test kitties");
   // we create some documents (kinda like sql table entries)
   const silence = new KittenModel({
     name: "Silence"
@@ -48,20 +50,47 @@ db.once('open', () => {
     if (err) return console.error(err);
     noName.speak();
   })
+
   // we display the stored documents (kinda like sql select from)
-  KittenModel.find((err, kittens) => {
-    if (err) return console.error(err);
-    console.log(kittens);
-  });
-  */
+  // KittenModel.find((err, kittens) => {
+  //   if (err) return console.error(err);
+  //   console.log(kittens);
+  // });
+  
 });
 
-
-let Person = PersonModel;
-
 const createAndSavePerson = (done) => {
+  console.log("attempting to create and save a person...");
 
-  done(null /*, data*/);
+  const newPerson = new PersonModel({
+    name: "Cosme Fulanito",
+    age: 56,
+    favoriteFoods: ["milanesa con papas fritas", "tarta de jamon y queso"]
+  });
+
+  newPerson.save(function(err, data) {
+    if (err) {
+      console.log("oh no :c");
+      console.log(err);
+      done(err);
+    } else {
+      console.log("success!");
+      console.log("created and saved:", data);
+      done(null, data);
+    }
+  });
+
+  // newPerson.save()
+  //   .then(function(data) {
+  //     console.log("success!");
+  //     console.log("created and saved:", data);
+  //     done(null, data);
+  //   })
+  //   .catch(function(err) {
+  //     console.log("oh no :c");
+  //     console.error(err);
+  //     done(err);
+  //   });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
@@ -114,7 +143,7 @@ const queryChain = (done) => {
 
 //----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
 
-exports.PersonModel = Person;
+exports.PersonModel = PersonModel;
 exports.createAndSavePerson = createAndSavePerson;
 exports.findPeopleByName = findPeopleByName;
 exports.findOneByFood = findOneByFood;
