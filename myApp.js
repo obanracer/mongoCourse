@@ -94,8 +94,20 @@ const createAndSavePerson = (done) => {
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
-};
+  console.log("attempting to create and save a multiple people...");
+  console.log(arrayOfPeople);
+  PersonModel.create(arrayOfPeople, function(err, data) {
+    if (err) {
+      console.log("oh no :c");
+      console.log(err);
+      done(err);
+    } else {
+      console.log("success!");
+      console.log("created and saved:", data);
+      done(null, data);
+    }
+  });
+}
 
 const findPeopleByName = (personName, done) => {
   done(null /*, data*/);
