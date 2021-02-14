@@ -94,7 +94,7 @@ const createAndSavePerson = (done) => {
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  console.log("attempting to create and save a multiple people...");
+  console.log("attempting to create and save multiple people...");
   console.log(arrayOfPeople);
   PersonModel.create(arrayOfPeople, function(err, data) {
     if (err) {
@@ -110,7 +110,20 @@ const createManyPeople = (arrayOfPeople, done) => {
 }
 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  console.log("attempting to find someone by name...");
+  console.log("looking for " + personName + "...");
+
+  PersonModel.find({ name: personName }).exec()
+    .then(data => {
+      console.log("success!");
+      console.log("found:", data);
+      done(null, data);
+    })
+    .catch(err => {
+      console.log("oh no :c");
+      console.log(err);
+      done(err);
+    });
 };
 
 const findOneByFood = (food, done) => {

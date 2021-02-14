@@ -2,20 +2,18 @@ import requests
 
 LOCALHOST_API = "http://localhost:3000/_api/"
 
+# =======================================================================
+# =======================================================================
+
+print("create and save one...\n")
 CREATE_AND_SAVE_ONE = LOCALHOST_API + "create-and-save-person"
-CREATE_MANY_RECORDS = LOCALHOST_API + "create-many-people"
-
-# =======================================================================
-# =======================================================================
-
-print("create and save one... \n")
 x = requests.get(CREATE_AND_SAVE_ONE)
 print(x.text + "\n")
 
 # =======================================================================
 # =======================================================================
 
-print("create many records... \n")
+print("create many records...\n")
 newPerson0 = {
   "name": "Rubén Quintana",
   "age": 53,
@@ -35,8 +33,22 @@ newPerson2 = {
 }
 
 arrayOfPeople = [newPerson0, newPerson1, newPerson2]
+
+CREATE_MANY_RECORDS = LOCALHOST_API + "create-many-people"
 x = requests.post(CREATE_MANY_RECORDS, json=arrayOfPeople)
 print(x.text + "\n")
+print("==============================================================\n")
 
 # =======================================================================
 # =======================================================================
+
+print("finding by name...\n")
+elvis = {
+  "name": "Elvis Presley",
+  "age": 42,
+  "favoriteFoods": ["El sándwich Elvis"]
+}
+
+FIND_ALL_BY_NAME = LOCALHOST_API + "find-all-by-name"
+x = requests.post(FIND_ALL_BY_NAME, data=elvis)
+print(x.text + "\n")
