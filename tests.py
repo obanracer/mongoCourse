@@ -78,3 +78,17 @@ FIND_BY_ID = LOCALHOST_API + "find-by-id"
 x = requests.get(FIND_BY_ID)
 print(x.text + "\n")
 print("==============================================================\n")
+
+# =======================================================================
+# =======================================================================
+
+print("finding, editing and saving...\n")
+hamburglar = {
+  "name": "El Hamburglero",
+  "age": 40,
+  "favoriteFoods": []
+}
+FIND_EDIT_SAVE = LOCALHOST_API + "find-edit-save"
+x = requests.post(FIND_EDIT_SAVE, data=hamburglar)
+print(x.text + "\n")
+print("==============================================================\n")

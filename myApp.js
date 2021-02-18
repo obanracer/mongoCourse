@@ -163,7 +163,28 @@ const findPersonById = (personId, done) => {
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
 
-  done(null /*, data*/);
+  PersonModel.findById(personId).exec()
+    .then((doc) => {
+      console.log("we found", doc);
+      console.log("let's see if we can edit it...");
+      doc.favoriteFoods.push(foodToAdd);
+      doc.save()
+        .then((data) => {
+          console.log("success!");
+          console.log("doc updated:", data);
+          done(null, data);
+        })
+        .catch((err) => {
+          console.log("oh no :c");
+          console.log(err);
+          done(err);
+        });
+    })
+    .catch((err) => {
+      console.log("oh no :c");
+      console.log(err);
+      done(err);
+    });
 };
 
 const findAndUpdate = (personName, done) => {
