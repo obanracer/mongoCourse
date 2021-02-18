@@ -9,6 +9,7 @@ print("create and save one...\n")
 CREATE_AND_SAVE_ONE = LOCALHOST_API + "create-and-save-person"
 x = requests.get(CREATE_AND_SAVE_ONE)
 print(x.text + "\n")
+print("==============================================================\n")
 
 # =======================================================================
 # =======================================================================
@@ -52,3 +53,19 @@ elvis = {
 FIND_ALL_BY_NAME = LOCALHOST_API + "find-all-by-name"
 x = requests.post(FIND_ALL_BY_NAME, data=elvis)
 print(x.text + "\n")
+print("==============================================================\n")
+
+# =======================================================================
+# =======================================================================
+
+print("finding one by food...\n")
+fosmeCulanito = {
+  "name": "Fosme Culanito",
+  "age": 65,
+  "favoriteFoods": ["milanesa con papas fritas", "tarta de queso y jamon"]
+}
+
+FIND_ONE_BY_FOOD = LOCALHOST_API + "find-one-by-food"
+x = requests.post(FIND_ONE_BY_FOOD, data=fosmeCulanito)
+print(x.text + "\n")
+print("==============================================================\n")

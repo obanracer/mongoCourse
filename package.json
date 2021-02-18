@@ -5,7 +5,8 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "debug": "set DEBUG=express:* & node server.js"
+        "debug": "set DEBUG=express:* & node server.js",
+        "tests": "python ./tests.py"
     },
     "dependencies": {
         "body-parser": "^1.15.2",

@@ -185,7 +185,7 @@ router.post("/find-one-by-food", function (req, res, next) {
         return next({ message: "Missing callback argument" });
       }
       res.json(data);
-      p.remove();
+      //p.remove();
     });
   });
 });

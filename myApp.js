@@ -20,36 +20,36 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
   console.log("open i guess?");
   
-  // test kitties
-  console.log("deploying test kitties");
-  // we create some documents (kinda like sql table entries)
-  const silence = new KittenModel({
-    name: "Silence"
-  });
-  const fluffy = new KittenModel({
-    name: "Fluffy",
-    age: 10,
-    breed: "Persian"
-  });
-  const noName = new KittenModel({
-    name: "No Name",
-    age: 5,
-    breed: "Siamese"
-  });
+  // // test kitties
+  // console.log("deploying test kitties");
+  // // we create some documents (kinda like sql table entries)
+  // const silence = new KittenModel({
+  //   name: "Silence"
+  // });
+  // const fluffy = new KittenModel({
+  //   name: "Fluffy",
+  //   age: 10,
+  //   breed: "Persian"
+  // });
+  // const noName = new KittenModel({
+  //   name: "No Name",
+  //   age: 5,
+  //   breed: "Siamese"
+  // });
 
-  // we save the documents of the Kitten Model (kinda like sql insert entry into table)
-  fluffy.save((err, fluffy) => {
-    if (err) return console.error(err);
-    fluffy.speak();
-  });
-  silence.save((err, silence) => {
-    if (err) return console.error(err);
-    silence.speak();
-  })
-  noName.save((err, noName) => {
-    if (err) return console.error(err);
-    noName.speak();
-  })
+  // // we save the documents of the Kitten Model (kinda like sql insert entry into table)
+  // fluffy.save((err, fluffy) => {
+  //   if (err) return console.error(err);
+  //   fluffy.speak();
+  // });
+  // silence.save((err, silence) => {
+  //   if (err) return console.error(err);
+  //   silence.speak();
+  // })
+  // noName.save((err, noName) => {
+  //   if (err) return console.error(err);
+  //   noName.speak();
+  // })
 
   // we display the stored documents (kinda like sql select from)
   // KittenModel.find((err, kittens) => {
@@ -127,7 +127,20 @@ const findPeopleByName = (personName, done) => {
 };
 
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  console.log("attempting to find one person by food...");
+  console.log("looking for someone who likes '" + food + "'...");
+
+  PersonModel.findOne({ favoriteFoods: food }).exec()
+    .then((data) => {
+      console.log("success!");
+      console.log("found:", data);
+      done(null, data);
+    })
+    .catch((err) => {
+      console.log("oh no :c");
+      console.log(err);
+      done(err);
+    });
 };
 
 const findPersonById = (personId, done) => {
