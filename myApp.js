@@ -144,7 +144,20 @@ const findOneByFood = (food, done) => {
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  console.log("attempting to find someone by id...");
+  console.log("looking for the person whose id is " + personId + "...");
+
+  PersonModel.findById(personId).exec()
+    .then((data) => {
+      console.log("success!");
+      console.log("found:", data);
+      done(null, data);
+    })
+    .catch((err) => {
+      console.log("oh no :c");
+      console.log(err);
+      done(err);
+    });
 };
 
 const findEditThenSave = (personId, done) => {

@@ -69,3 +69,12 @@ FIND_ONE_BY_FOOD = LOCALHOST_API + "find-one-by-food"
 x = requests.post(FIND_ONE_BY_FOOD, data=fosmeCulanito)
 print(x.text + "\n")
 print("==============================================================\n")
+
+# =======================================================================
+# =======================================================================
+
+print("finding someone by id...\n")
+FIND_BY_ID = LOCALHOST_API + "find-by-id"
+x = requests.get(FIND_BY_ID)
+print(x.text + "\n")
+print("==============================================================\n")
