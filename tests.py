@@ -92,3 +92,20 @@ FIND_EDIT_SAVE = LOCALHOST_API + "find-edit-save"
 x = requests.post(FIND_EDIT_SAVE, data=hamburglar)
 print(x.text + "\n")
 print("==============================================================\n")
+
+# =======================================================================
+# =======================================================================
+
+print("finding by id and updating a single document...\n")
+hamburTrucho = {
+  "name": "El Hamburglero",
+  "age": 40,
+  "favoriteFoods": ["pizza", "PERO MIRALO QUE TRUUUCHOOOOO!!!"]
+}
+FIND_AND_UPDATE = LOCALHOST_API + "find-one-update"
+x = requests.post(FIND_AND_UPDATE, data=hamburTrucho)
+print(x.text + "\n")
+print("==============================================================\n")
+
+# =======================================================================
+# =======================================================================

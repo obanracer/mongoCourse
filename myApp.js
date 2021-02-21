@@ -4,8 +4,12 @@ var KittenModel = require("./models/kitten.js");
 var PersonModel = require("./models/person.js");
 
 var mongoose = require("mongoose");
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-
+mongoose.connect(process.env.MONGO_URI,
+  { // options
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+    useFindAndModify: false     // for deperecation purposes
+  })
   .then(() => {
     console.log("connected to mongoDB successfully");
   })
@@ -189,8 +193,23 @@ const findEditThenSave = (personId, done) => {
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
+  console.log("we'll try to find someone named", personName, "and set their age to", ageToSet, "...");
 
-  done(null /*, data*/);
+  PersonModel.findOneAndUpdate(
+    { name: personName},  // query filter
+    { age: ageToSet },    // what to update
+    { new: true }         // options obj, set "new" prop to return modified doc
+  ).exec()
+    .then(function success(updatedDoc) {
+      console.log("success!");
+      console.log("now the doc is:", updatedDoc);
+      done(null, updatedDoc);
+    })
+    .catch(function failure(err) {
+      console.log("oh no :c");
+      console.log(err);
+      done(err);
+    });
 };
 
 const removeById = (personId, done) => {
