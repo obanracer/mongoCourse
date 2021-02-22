@@ -213,7 +213,20 @@ const findAndUpdate = (personName, done) => {
 };
 
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  console.log("we'll try to remove the person with id", personId);
+
+  // the mongoose docs suggest using findByIdAndDelete, but we'll follow the course
+  PersonModel.findByIdAndRemove(personId).exec()
+    .then(function success(removedDoc) {
+      console.log("success!");
+      console.log("we removed:", removedDoc);
+      done(null, removedDoc);
+    })
+    .catch(function failure(err) {
+      console.log("oh no :c");
+      console.log(err);
+      done(err);
+    });
 };
 
 const removeManyPeople = (done) => {

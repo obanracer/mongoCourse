@@ -277,7 +277,7 @@ router.post("/find-one-update", function (req, res, next) {
 
 const removeOne = require("./myApp.js").removeById;
 router.post("/remove-one-person", function (req, res, next) {
-  Person.remove({}, function (err) {
+  Person.remove({}, function (err) {  // deprecated
     if (err) {
       return next(err);
     }
@@ -299,14 +299,14 @@ router.post("/remove-one-person", function (req, res, next) {
             console.log("Missing `done()` argument");
             return next({ message: "Missing callback argument" });
           }
-          console.log(data);
+          //console.log(data);
           Person.count(function (err, cnt) {
             if (err) {
               return next(err);
             }
             data = data.toObject();
             data.count = cnt;
-            console.log(data);
+            //console.log(data);
             res.json(data);
           });
         });
