@@ -232,7 +232,20 @@ const removeById = (personId, done) => {
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
 
-  done(null /*, data*/);
+  // note that there are other ways to delete documents, each with their specific details
+  // always read the docs!
+  // also deprecated lol
+  PersonModel.remove({ name: nameToRemove }).exec()
+    .then(function success(queryResults) {
+      console.log("success!");
+      console.log("the results are:", queryResults);
+      done(null, queryResults);
+    })
+    .catch(function failure(err) {
+      console.log("oh no :c");
+      console.log(err);
+      done(err);
+    });
 };
 
 const queryChain = (done) => {
